@@ -11,7 +11,7 @@ import java.util.List;
 @RequestMapping("/remotes")
 public class RemoteController {
 
-    IRemoteLoader remoteLoader = new RemoteLoader();
+    IRemoteLoader remoteLoader =  RemoteLoader.getInstance();
 
     @PostMapping("/{id}")
     public boolean setup(@PathVariable int id, @RequestBody List<DeviceData> devices) {
@@ -29,5 +29,9 @@ public class RemoteController {
         return remoteLoader.offButtonWasPushed(id, slot);
     }
 
+    @GetMapping("/{id}/setVolume/{volume}")
+    public String setStereoVolume(@PathVariable int id, @PathVariable int volume) {
+        return remoteLoader.setStereoVolume(id, volume);
+    }
 
 }
